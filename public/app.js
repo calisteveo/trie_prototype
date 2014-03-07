@@ -15,6 +15,21 @@ window.App = {
 
   }
 };
+
+App.Routers.Main = Backbone.Router.extend({
+  routes: {
+    "": "index",
+  },
+
+  index: function(){
+    $.get("").done(function (data){
+      var view = new App.Views.Index({ collection: data });
+      $('container').html(view.render().el);
+    });
+  }
+
+});
+
 $(document).ready(function(){
   App.initialize();
 });
