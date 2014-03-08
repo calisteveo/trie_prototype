@@ -4,7 +4,6 @@ Trie = function(){
 
 Trie.prototype.learn = function(word, index){
   index = index || 0;
-  var word = word;
   var char = word[index];
 
   if (this.characters[char]){
