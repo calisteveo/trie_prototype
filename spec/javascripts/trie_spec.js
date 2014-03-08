@@ -51,6 +51,12 @@ describe("Trie", function() {
         t.learn("begin");
         expect(t.find("b")).toEqual(t.characters.b);
       });
+      it("returns the last node for a prefix", function(){
+        t.learn("begin");
+        t.learn("began");
+        var ending = t.characters.b.characters.e.characters.g;
+        expect(t.find("beg")).toEqual(ending);
+      });
     });
 
     describe(".getWords", function(){
@@ -67,6 +73,12 @@ describe("Trie", function() {
       it("gets its own node if it is a word", function(){
         t.learn("a");
         expect(t.characters.a.getWords()).toEqual([""]);
+      });
+      it("returns multiple children on different branches", function(){
+        t.learn("begin");
+        t.learn("best");
+        expect(t.getWords()
+          ).toEqual(["begin", "best"]);
       });
       it("returns an empty array if there are no words", function(){
         expect(t.getWords()).toEqual([]);

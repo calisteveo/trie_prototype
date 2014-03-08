@@ -3,6 +3,20 @@ Trie = function(){
 };
 
 Trie.prototype.learn = function(word, index){
+  index = index || 0;
+  var word = word;
+  var char = word[index];
+
+  if (this.characters[char]){
+    this.characters[char].learn(word, index+1);
+  } else {
+    if (index === word.length){
+      this.isWord = true;
+    } else {
+      this.characters[char] = new Trie();
+      this.characters[char].learn(word, index+1);
+    }
+  }
   // This function should add the given word,
   // starting from the given index,
   // to this Trie.
@@ -19,6 +33,21 @@ Trie.prototype.learn = function(word, index){
 };
 
 Trie.prototype.getWords = function(words, currentWord){
+  words = words || [];
+  currentWord = currentWord || "";
+
+//for char in this.characters {}
+
+  if (this.isWord){
+    words.push(currentWord);
+  }
+  for (var char in this.characters){
+    var newWord = currentWord + char;
+    if (this.characters[char].characters){
+      this.characters[char].getWords(words, newWord);
+    }
+  }
+  return words;
   // This function will return all the words which are
   // contained in this Trie.
   // it will use currentWord as a prefix,
