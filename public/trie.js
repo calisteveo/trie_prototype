@@ -61,7 +61,21 @@ Trie.prototype.getWords = function(words, currentWord){
   // Be sure to consider what happens if the word is not in this Trie.
 
 Trie.prototype.find = function(word, index){
+  word = word || "";
+  index = index || 0;
+  var _this = this;
+  var chars;
+
+  for (var i = index; i < word.length; i++){
+    if (_this){
+      chars = _this.characters[word[i]];
+      _this = chars;
+    } else {
+      chars = false;
+    }
+  }
  
+  return chars;
 };
 
   // This function will return all completions 

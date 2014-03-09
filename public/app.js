@@ -13,6 +13,9 @@ window.App = {
       autocompleter.add(m.data); 
     };
 
+    var view = new App.Views.View();
+    $('#container').html(view.render().el);
+
   }
 };
 $(document).ready(function(){
