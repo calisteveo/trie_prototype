@@ -83,5 +83,10 @@ Trie.prototype.find = function(word, index){
   // It should use find and getWords.
 
 Trie.prototype.autoComplete = function(prefix){
-  
+  var find_results = this.find(prefix);
+  if (find_results){
+    return find_results.getWords([], prefix);
+  } else {
+    return [];
+  }
 };
